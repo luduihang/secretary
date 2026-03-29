@@ -43,18 +43,12 @@ async def handle_message(request: Request, background_tasks: BackgroundTasks):
     # 2. 解密
     # 修改点：解密返回的是元组，我们只需要第一个值 plain_xml
     plain_xml, _ = crypt.decrypt(encrypt_content)
-    
-    print("plain_xml:", plain_xml)  # 调试输出解密后的明文
     if not plain_xml:
         return "decrypt error"
 
     msg_tree = ET.fromstring(plain_xml)
-    print("msg_tree:", ET.tostring(msg_tree, encoding='utf-8').decode('utf-8'))  # 调试输出消息树内容
     user_id = msg_tree.find("FromUserName").text
     content = msg_tree.find("Content").text
-
-    print("user_id:", user_id)  # 调试输出用户 ID
-    print("content:", content)  # 调试输出消息内容
 
     # 3. 核心：异步处理
     background_tasks.add_task(process_ai_task, user_id, content)
