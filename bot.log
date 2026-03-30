@@ -1,0 +1,54 @@
+nohup: ignoring input
+INFO:     Started server process [3027830]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     106.55.227.187:29836 - "POST /wechat?msg_signature=a0066f9fd43cfe2e01a00fe4c8b46ab0c8c6ea91&timestamp=1774778227&nonce=1774938802 HTTP/1.1" 200 OK
+INFO:     147.185.132.49:63832 - "GET / HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     94.231.206.155:45809 - "GET / HTTP/1.1" 404 Not Found
+INFO:     94.231.206.132:44521 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     103.203.57.20:57314 - "GET / HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     204.76.203.51:58398 - "GET http%3A//azenv.net/ HTTP/1.1" 404 Not Found
+INFO:     204.76.203.51:60588 - "CONNECT dnspod.qcloud.com%3A443 HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     167.94.146.50:28056 - "GET / HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     167.94.146.50:62472 - "GET / HTTP/1.1" 404 Not Found
+INFO:     167.94.146.50:62474 - "PRI %2A HTTP/2.0" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     167.94.146.50:62570 - "GET /.well-known/security.txt HTTP/1.1" 404 Not Found
+INFO:     204.76.203.51:36926 - "GET http%3A//azenv.net/ HTTP/1.1" 404 Not Found
+INFO:     204.76.203.51:33020 - "CONNECT dnspod.qcloud.com%3A443 HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     66.132.195.44:29902 - "GET / HTTP/1.1" 404 Not Found
+INFO:     66.132.195.44:29914 - "PRI %2A HTTP/2.0" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     66.132.195.44:35144 - "GET /robots.txt HTTP/1.1" 404 Not Found
+INFO:     134.122.14.109:50496 - "GET / HTTP/1.1" 404 Not Found
+INFO:     134.122.14.109:50504 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     47.99.105.95:42018 - "GET / HTTP/1.1" 404 Not Found
+INFO:     47.99.105.95:42022 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     64.226.87.220:44670 - "GET / HTTP/1.1" 404 Not Found
+INFO:     64.226.87.220:40828 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     198.235.24.206:57772 - "GET / HTTP/1.1" 404 Not Found
+INFO:     20.65.195.19:60818 - "GET / HTTP/1.1" 404 Not Found
+INFO:     204.76.203.51:44320 - "GET http%3A//azenv.net/ HTTP/1.1" 404 Not Found
+INFO:     204.76.203.51:44352 - "CONNECT dnspod.qcloud.com%3A443 HTTP/1.1" 404 Not Found
+INFO:     74.82.47.2:20192 - "GET / HTTP/1.1" 404 Not Found
+INFO:     74.82.47.26:24739 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     74.82.47.30:38651 - "GET http%3A//api.ipify.org/?format=json HTTP/1.1" 404 Not Found
+INFO:     74.82.47.2:50411 - "CONNECT www.shadowserver.org%3A443 HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     147.185.132.115:65136 - "GET /metrics HTTP/1.1" 404 Not Found
+INFO:     204.76.203.51:59240 - "GET http%3A//azenv.net/ HTTP/1.1" 404 Not Found
+INFO:     204.76.203.51:59256 - "CONNECT dnspod.qcloud.com%3A443 HTTP/1.1" 404 Not Found
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [3027830]

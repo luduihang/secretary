@@ -4,6 +4,7 @@ from utils.wechat_api import WeChatAPI
 from core.ai_engine import AIEngine
 import xml.etree.ElementTree as ET
 import os
+import asyncio  # 新增：控制发送间隔，防企业微信限流
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -15,9 +16,26 @@ wechat = WeChatAPI()
 ai = AIEngine()
 
 async def process_ai_task(user_id: str, content: str):
-    """后台异步处理 AI 逻辑并推送结果"""
-    answer = await ai.get_ai_response(content, user_id)
-    await wechat.send_text_msg(user_id, answer)
+    """
+    🔥 改造：分段接收AI内容 → 分段推送企业微信
+    接近流式体验，轻量服务器无压力
+    """
+    # 1. 先推送「正在思考...」提示（体验拉满）
+    await wechat.send_text_msg(user_id, "🧠 AI正在思考中，请稍候...")
+    
+    try:
+        # 2. 遍历AI分段生成的内容，逐段推送
+        async for segment in ai.stream_ai_response(content, user_id):
+            if segment.strip():  # 过滤空内容
+                await wechat.send_text_msg(user_id, segment)
+                # 轻微延迟（可选），防止企业微信发送频率限制
+                await asyncio.sleep(0.2)
+        
+        # 3. 最后推送完成提示（可选）
+        await wechat.send_text_msg(user_id, "✅ 回复完毕")
+    
+    except Exception as e:
+        await wechat.send_text_msg(user_id, f"❌ 服务异常：{str(e)}")
 
 
 @app.get("/wechat")
