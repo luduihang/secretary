@@ -20,8 +20,6 @@ async def process_ai_task(user_id: str, content: str):
     🔥 改造：分段接收AI内容 → 分段推送企业微信
     接近流式体验，轻量服务器无压力
     """
-    # 1. 先推送「正在思考...」提示（体验拉满）
-    await wechat.send_text_msg(user_id, "🧠 AI正在思考中，请稍候...")
     
     try:
         # 2. 遍历AI分段生成的内容，逐段推送

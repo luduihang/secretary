@@ -15,30 +15,37 @@ class AIEngine:
     # ===================== 工具函数：Markdown 转 企业微信纯文本 =====================
     def format_markdown_for_wechat(self, text: str) -> str:
         """
-        企业微信不支持Markdown，转换为美观纯文本
-        修复标题、粗体、列表、代码块、换行等格式问题
+        🔥 通用终极版：AI逻辑分点优先 + 企业微信纯文本美化
+        1. 完整保留 1.2.3. / 序号 / 分点结构（核心！）
+        2. 清理所有Markdown冗余符号
+        3. 美化分隔线、标题、排版
+        4. 全场景适配（日常/学术/代码/问答）
         """
         if not text:
-            return text
+            return ""
         
-        # 1. 移除标题符号 # → 换成【】+换行
-        text = re.sub(r'### (.*?)\n', r'【\1】\n', text)
-        text = re.sub(r'## (.*?)\n', r'【\1】\n', text)
-        text = re.sub(r'# (.*?)\n', r'【\1】\n', text)
+        # 1. 处理分隔线 --- 转为企业微信优雅分割线（区块分隔）
+        text = re.sub(r'^\s*[-=]{3,}\s*$', '━━━━━━━━━━━━', text, flags=re.MULTILINE)
         
-        # 2. 移除粗体 ** **
-        text = re.sub(r'\*\*(.*?)\*\*', r'\1', text)
+        # 2. 处理标题 # → 简洁【标题】格式（不夸张，通用美观）
+        text = re.sub(r'#{1,4}\s+(.+)', r'【\1】', text)
         
-        # 3. 列表符号 -/* → 改为 ▶️ 更美观
-        text = re.sub(r'^- ', '▶️ ', text, flags=re.MULTILINE)
-        text = re.sub(r'^\* ', '▶️ ', text, flags=re.MULTILINE)
+        # 3. 移除粗体 ** ** （保留文字，去掉符号）
+        text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)
+        text = re.sub(r'__(.+?)__', r'\1', text)
         
-        # 4. 移除代码块```，替换为标识
-        text = re.sub(r'```.*?\n', '', text)
-        text = text.replace('```', '')
+        # 4. 保留所有分点格式：1. 2. 3. / - / * （完全不修改AI原生分点）
+        # 仅美化无序列表符号，更美观
+        text = re.sub(r'^\*\s', '• ', text, flags=re.MULTILINE)
+        text = re.sub(r'^-\s', '• ', text, flags=re.MULTILINE)
         
-        # 5. 清理多余空行，保证微信阅读舒适
-        text = re.sub(r'\n{3,}', '\n\n', text)
+        # 5. 清理代码块、冗余符号
+        text = re.sub(r'```[\s\S]*?```', '', text)  # 移除代码块
+        text = text.replace('`', '')  # 移除行内代码符号
+        
+        # 6. 优化排版：清理多余空行，保证分点清晰、不松散
+        text = re.sub(r'\n\s*\n', '\n', text)  # 合并空行
+        text = re.sub(r' +', ' ', text)  # 合并多余空格
         
         return text.strip()
 
@@ -59,8 +66,8 @@ class AIEngine:
             # 句子结束符（语义分割）
             sentence_enders = {"。", "！", "？", "；", "!", "?", "-"}
             # ===================== 优化分段：100字左右区间（自然不生硬） =====================
-            MIN_CACHE = 40   # 最小80字
-            MAX_CACHE = 150  # 最大120字
+            MIN_CACHE = 80   # 最小80字
+            MAX_CACHE = 300  # 最大120字
             # 围绕 100 字，语义优先分段
 
             async for chunk in stream:
