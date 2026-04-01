@@ -29,7 +29,7 @@ def get_today_chat_records():
     conversations_col = summary_db.db["conversations"]
     
     now = datetime.now(TIMEZONE)
-    start_of_day = now.replace(hour=0, minute=0, second=0, microsecond=0) 
+    start_of_day = now.replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1) 
     end_of_day = start_of_day + timedelta(days=1)
     
     # 查询条件：匹配你的 user_id + 今日时间范围
